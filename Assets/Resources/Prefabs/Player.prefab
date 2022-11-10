@@ -153,7 +153,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalForce: 100
   horizontalSpeed: 10
-  verticalForce: 30
+  verticalForce: 15
   airFactor: 0.5
   groundPoint: {fileID: 863922115743373149}
   groundRadius: 0.5
@@ -202,3 +202,5 @@ MonoBehaviour:
   leftJoystick: {fileID: 0}
   horizontalSensitivity: 0.804
   verticalSensitivity: 0.703
+  animator: {fileID: 0}
+  playerAnimationState: 0
