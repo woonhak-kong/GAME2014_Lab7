@@ -15,12 +15,21 @@ public class PlayerBehavior : MonoBehaviour
     public LayerMask groundLayerMask;
     public bool isGrounded;
 
+
+    [Header("Controller")]
+    public Joystick leftJoystick;
+    [Range(0.1f, 1.0f)]
+    public float horizontalSensitivity;
+    [Range(0.1f, 1.0f)]
+    public float verticalSensitivity;
+
     private Rigidbody2D rigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        leftJoystick = GameObject.Find("LeftStick").GetComponent<Joystick>();
     }
 
     // Update is called once per frame
@@ -34,7 +43,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void Move()
     {
-        float x = Input.GetAxisRaw("Horizontal");
+        float x = Input.GetAxisRaw("Horizontal") + leftJoystick.Horizontal * horizontalSensitivity;
         if (x != 0.0f)
             x = x > 0.0f ? 1.0f : -1.0f;
         rigidbody.AddForce(Vector2.right * x * horizontalForce * (isGrounded ? 1 : airFactor));
@@ -43,8 +52,8 @@ public class PlayerBehavior : MonoBehaviour
 
     private void Jump()
     {
-        float y = Input.GetAxis("Jump");
-        if (isGrounded && y > 0.0f)
+        float y = Input.GetAxis("Jump") + leftJoystick.Vertical;
+        if (isGrounded && y > verticalSensitivity)
         {
             rigidbody.AddForce(Vector2.up * verticalForce, ForceMode2D.Impulse);
         }
